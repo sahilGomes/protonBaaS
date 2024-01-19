@@ -15,7 +15,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="navbar-container w-16 border-r-2 relative">
+      <div className="navbar-container w-16 border-r-[0.5px] relative">
         <nav>
           <Link to="/" className=" mt-4 h-[55px]"><img src={main_logo} alt="ProtonBaaS" className="w-[48px] h-[48px]"/></Link>
           <NavLink to={"/dbdata"} className="hover:bg-base-300"><img src={dbdata_logo} alt="dbdata_logo" className="w-[48px] h-[48px]"/></NavLink>
