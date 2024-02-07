@@ -1,0 +1,7 @@
+<svg data-icon-name="power" data-style="line" icon_origin_id="3056" viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg" id="power" class="icon line" width="48" height="48">
+    <path d="M12,13a1,1,0,0,1-1-1V3a1,1,0,0,1,2,0v9A1,1,0,0,1,12,13Z"
+        style="stroke-width: 1.25; stroke: rgb(0, 205, 184);"></path>
+    <path d="M12,22A9,9,0,0,1,5.64,6.64,1,1,0,0,1,7.05,8.05a7,7,0,1,0,9.9,0,1,1,0,0,1,1.41-1.41A9,9,0,0,1,12,22Z"
+        style="stroke-width: 1.25; stroke: rgb(0, 205, 184);"></path>
+</svg>

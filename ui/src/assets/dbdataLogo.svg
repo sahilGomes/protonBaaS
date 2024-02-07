@@ -1,0 +1,13 @@
+<svg data-icon-name="agenda-pencil" data-style="line" icon_origin_id="18752" viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg" data-name="Line Color" id="agenda-pencil" class="icon line" width="48"
+    height="48">
+    <path
+        style="fill: none; stroke: rgb(0, 205, 184); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.25;"
+        d="M20.71,7.69l-1.4-1.4a1,1,0,0,0-1.4,0L13,11.2V14h2.8l4.91-4.91A1,1,0,0,0,20.71,7.69Z" id="secondary"></path>
+    <path
+        style="fill: none; stroke: rgb(0, 205, 184); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.25;"
+        d="M18,18v2a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3H15" id="primary"></path>
+    <path
+        style="fill: none; stroke: rgb(0, 205, 184); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.25;"
+        d="M3,8H5M3,12H5M3,16H5" data-name="primary" id="primary-2"></path>
+</svg>
