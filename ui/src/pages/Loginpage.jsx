@@ -11,13 +11,13 @@ export default function Loginpage() {
 
   useEffect(() => {
     if (data_present_in_localstorage) {
-      navigate("/editor");
+      navigate("/dbdata");
     }
   });
 
   function buttonEffect(action) {
     buttonref.current.style.cursor = action ? "not-allowed" : "pointer";
-    buttonref.current.style.animation = action ? "loadingLogin 0.5s 0s infinite alternate" : undefined;
+    buttonref.current.style.animation = action ? "loadingLogin 0.4s 0s infinite alternate" : undefined;
   }
 
   async function handleSubmitData(event) {
@@ -33,8 +33,7 @@ export default function Loginpage() {
     // make request and do appropriate action on response
     try {
       const res = await fetch(
-        // `${location.protocol}://${location.host}/api/admins/auth-with-password`,
-        "http://127.0.0.1:3000/api/admins/auth-with-password",
+        `${location.protocol}//${location.hostname}:3000/api/admins/auth-with-password`,
         {
           method: 'POST',
           body: JSON.stringify(dataToSend),
@@ -53,7 +52,7 @@ export default function Loginpage() {
       else {
         localStorage.setItem("admin_auth", JSON.stringify(resData));
         buttonEffect(false);
-        navigate("/editor");
+        navigate("/dbdata");
       }
     } catch (err) {
       setPopmessage("Error! RETRY again");
@@ -69,8 +68,8 @@ export default function Loginpage() {
 
   if (!data_present_in_localstorage) {
     return (
-      <div className="main-container flex flex-col h-screen">
-        <main className="w-full h-[95%] flex justify-center items-center min-h-[650px] bg-base-100">
+      <div className="main-container flex flex-col h-screen w-screen">
+        <main className="w-full h-[95%] flex justify-center items-center min-h-[650px]">
           <div className="form-container h-[60%] w-[90%] border-solid border-neutral border-2 rounded-lg max-w-[420px]">
             <div className="text-center font-mono text-3xl mb-[20px] mt-[10px]  text-neutral-content font-bold flex justify-center gap-2">
               <img src={logo} alt="logo" />
@@ -102,7 +101,7 @@ export default function Loginpage() {
             </form>
           </div>
         </main>
-        <footer className="h-[5%] flex justify-end items-center pr-[8px] bg-neutral">
+        <footer className="h-[5%] flex justify-end items-center pr-[8px] bg-base-200">
           <p className="text-right text-accent-content"><a href="https://github.com/sahilGomes/protonBaaS" target="_blank" className="text-accent">Github </a>| ProtonBaaS version 0.0.1</p>
         </footer>
       </div>
