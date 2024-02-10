@@ -27,6 +27,7 @@
   }
 }
 
+/* for active navbar link */
 nav a{
   display: block;
   width: 48px;
@@ -37,4 +38,10 @@ nav a{
 nav .active{
   border-radius: 40%;
   border: 2px solid #00cdb8;
+}
+
+
+/* for active collection tables */
+collectionholder .active{
+  background-color: rgb(21 25 30);
 }
