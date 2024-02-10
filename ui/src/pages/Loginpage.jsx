@@ -11,10 +11,11 @@ export default function Loginpage() {
 
   useEffect(() => {
     if (data_present_in_localstorage) {
-      navigate("/dbdata");
+      navigate("/collections");
     }
   });
 
+  // blink effect on login action and stop if error or response
   function buttonEffect(action) {
     buttonref.current.style.cursor = action ? "not-allowed" : "pointer";
     buttonref.current.style.animation = action ? "loadingLogin 0.4s 0s infinite alternate" : undefined;
@@ -52,7 +53,7 @@ export default function Loginpage() {
       else {
         localStorage.setItem("admin_auth", JSON.stringify(resData));
         buttonEffect(false);
-        navigate("/dbdata");
+        navigate("/collections");
       }
     } catch (err) {
       setPopmessage("Error! RETRY again");

@@ -11,7 +11,7 @@ const router = createHashRouter(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Homepage/>}/>
       <Route path="login" element={<Loginpage/>}/>
-      <Route path="dbdata" element={<Editorpage/>}/>
+      <Route path="collections" element={<Editorpage/>}/>
       <Route path="logs" element={<Logspage/>}/>
       <Route path="settings" element={<Settingspage/>}/>
     </Route>
