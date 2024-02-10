@@ -4,6 +4,6 @@ export default function Settingspage() {
     useSetNav();
 
     return (
-        <div>Settingspage</div>
+        <div className="w-[100%]">Settingspage</div>
     )
 }
