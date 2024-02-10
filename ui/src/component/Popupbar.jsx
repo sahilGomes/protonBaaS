@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 export default function Popupbar({popmessage,setPopmessage}) {
 
     useEffect(()=>{
-        let timeoutId = setTimeout(()=>setPopmessage(""),5000);
+        let timeoutId = setTimeout(()=>setPopmessage(""),4000);
         return ()=>{
             clearTimeout(timeoutId);
         }
