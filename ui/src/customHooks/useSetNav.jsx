@@ -11,6 +11,6 @@ export default function useSetNav() {
         else {
             setShowNav(true);
         }
-    }, []);
+    }, [setShowNav]);
     return setPopmessage;
 }
