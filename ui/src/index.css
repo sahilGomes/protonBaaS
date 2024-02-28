@@ -45,3 +45,8 @@ nav .active{
 .collectionholder.active{
   background-color: rgb(21 25 30);
 }
+
+/* for transition of open record data for editing or new in Documentstable and overlayout component */
+.show{
+  width: 690px;
+}
