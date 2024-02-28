@@ -103,7 +103,7 @@ export default function Loginpage() {
           </div>
         </main>
         <footer className="h-[5%] flex justify-end items-center pr-[8px] bg-base-200">
-          <p className="text-right text-accent-content"><a href="https://github.com/sahilGomes/protonBaaS" target="_blank" className="text-accent">Github </a>| ProtonBaaS version 0.0.1</p>
+          <p className="text-right text-accent-content"><a href="https://github.com/sahilGomes/protonBaaS" target="_blank" rel="noreferrer" className="text-accent">Github </a>| ProtonBaaS version 0.0.1</p>
         </footer>
       </div>
     );
