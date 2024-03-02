@@ -10,7 +10,7 @@ export default function RootLayout() {
   return (
     <>
       {popmessage && <Popupbar popmessage={popmessage} setPopmessage={setPopmessage} />}
-      <div className='app-container flex w-full h-screen bg-base-100'>
+      <div className='app-container flex w-full h-screen bg-base-100 relative overflow-hidden'>
         {showNav && <Navbar/>}
         <Outlet context={{ setShowNav,setPopmessage }} />
       </div>
