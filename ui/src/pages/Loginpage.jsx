@@ -2,9 +2,11 @@ import useSetNav from "../customHooks/useSetNav";
 import logo from "../assets/logo.png";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 
 export default function Loginpage() {
-  const setPopmessage = useSetNav();
+  useSetNav();
+  const {setPopmessage} = useOutletContext();
   const buttonref = useRef();
   const navigate = useNavigate();
   let data_present_in_localstorage = localStorage.getItem("admin_auth") ? true : false;
