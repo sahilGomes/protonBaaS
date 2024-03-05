@@ -54,7 +54,7 @@ export default function CSidepanle({ showPanelData,setShowPanelData }) {
                         overlayout.classList.remove("show");
                     }} className="cursor-pointer bg-primary p-1 text-primary-content select-none">close</div>
                 </div>
-                <div className="form-option flex flex-col h-[85%] overflow-y-scroll">
+                <div className="form-option flex flex-col h-[85%] overflow-y-auto">
                         <div>
                             <label className="form-control w-full">
                                 <div className="label">
@@ -73,7 +73,7 @@ export default function CSidepanle({ showPanelData,setShowPanelData }) {
                             <textarea name="collection-schema" className="textarea textarea-bordered w-[100%]" id="" cols="50" rows="5" placeholder='put rules e.g:-{"list rule":"","view rule":"","update rule":"","delete rule":"","create rule":""}' onChange={handleonChangeRules} value={showPanelData.action !== "new" ? showPanelData.rule : undefined}></textarea>
                         </div>
                 </div>
-                <div className="base h-[10%] flex justify-end gap-4">
+                <div className="base h-[10%] flex justify-end gap-4 items-center">
                     <button className="btn btn-neutral" onClick={handleCancelButton}>cancel</button>
                     <button className="btn btn-primary" onClick={handleSave}>save</button>
                 </div>
