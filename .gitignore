@@ -26,3 +26,4 @@ dist-ssr
 # self file
 test/
 tp/
+.env
