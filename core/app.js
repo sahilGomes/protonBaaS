@@ -15,10 +15,11 @@ app.use(cookieParser());
 app.use("/pub",express.static(join(dirname(fileURLToPath(import.meta.url)),'public')));
 
 // routing according to path
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+import adminRouter from "./routes/admin.routes.js";
+import userRouter from "./routes/user.routes.js"
 
-
+app.use("/api/admins",adminRouter);
+app.use("/api/users",userRouter);
 
 // handling error
 // app.use(function(err, req, res, next) {
@@ -29,4 +30,4 @@ app.use("/pub",express.static(join(dirname(fileURLToPath(import.meta.url)),'publ
 //   res.send("error")
 // });
 
-export {app};
+export default app;
