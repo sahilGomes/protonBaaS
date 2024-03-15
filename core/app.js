@@ -16,10 +16,12 @@ app.use("/pub",express.static(join(dirname(fileURLToPath(import.meta.url)),'publ
 
 // routing according to path
 import adminRouter from "./routes/admin.routes.js";
-import userRouter from "./routes/user.routes.js"
+import userRouter from "./routes/user.routes.js";
+import collectionRouter from "./routes/collection.routes.js";
 
 app.use("/api/admins",adminRouter);
 app.use("/api/users",userRouter);
+app.use("/api/collections",collectionRouter);
 
 // handling error
 // app.use(function(err, req, res, next) {
