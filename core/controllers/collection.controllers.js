@@ -3,6 +3,7 @@ import collection from "../models/collection.models.js";
 import createError from "http-errors";
 import jwt from "jsonwebtoken";
 
+// logic regarding collection----------------------------------------------------------------------------#
 async function listCollection(req, res, next) {
     /* 
     1.check if authorization header is present else send 401
@@ -170,5 +171,9 @@ async function deleteCollection(req, res, next) {
         return;
     }
 }
+
+
+// logic regarding records-------------------------------------------------------------------------------#
+
 
 export { listCollection, createCollection, updateCollection, deleteCollection }

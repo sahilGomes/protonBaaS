@@ -61,11 +61,25 @@ async function listAdmin(req, res, next) {
 
 async function addAdmin(req, res, next) {
     /* 
+    0.check if,admins collection present and go to next,if not add current admin from body and send 200
     1.check authorization header is present, or else send 401
     2.if ok,check authorization if not authorized send 401
     3.if ok,and req.body is not null add the admin using provided data,if data is not validated catch it and send 400
     4.if ok,send 200
     */
+    if(await admin.find() === null){
+        try {
+            let result = await admin.create({
+                email: req.body.email,
+                password: req.body.password
+            });
+            res.sendStatus(200);
+        } catch (error) {
+            next(new createError[400]);
+            return;
+        }
+    }
+
     if ((req.get("Authorization") === "") || (req.get("Authorization") === undefined)) {
         next(new createError[401]);
         return;
