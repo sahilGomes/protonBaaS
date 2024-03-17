@@ -34,7 +34,7 @@ function _makeSchemaDynamically(collectionSchema) {
     for (let schemaData of collectionSchema.schema) {
         schemaToReturn[schemaData.name] = _returnType(schemaData.type);
     }
-    return mongoose.Schema(schemaToReturn);
+    return mongoose.Schema(schemaToReturn,{timestamps: true});
 }
 
 function _returnType(type) {
