@@ -76,7 +76,7 @@ async function createCollection(req, res, next) {
     try {
         await collection.create({
             name: req.body.name,
-            schema: [...req.body.schema, { name: "createdAt", type: "date" }, { name: "updatedAt", type: "date" }],
+            schema: [{name:"userId",type:"string"},...req.body.schema, { name: "createdAt", type: "date" }, { name: "updatedAt", type: "date" }],
             rules: req.body.rules
         });
         res.sendStatus(200);
