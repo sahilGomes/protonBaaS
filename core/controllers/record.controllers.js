@@ -23,7 +23,90 @@ async function listRecord(req, res, next) {
     }
     let listRule = process.models.get(req.params.collectionId).rules.listRule;
 
-    
+    if (listRule === "locked") {
+        if ((req.get("Authorization") === "") || (req.get("Authorization") === undefined)) {
+            next(new createError[401]);
+            return;
+        }
+
+        let verifiedJWT;
+        try {
+            verifiedJWT = jwt.verify(req.get("Authorization"), process.env.SECRET_KEY, 'HS256');
+        } catch (error) {
+            next(new createError[401]);
+            return;
+        }
+        let result = await admin.findOne({ _id: verifiedJWT.id });
+        if (result === null) {
+            next(new createError[401]);
+            return;
+        }
+
+        try {
+            let records = await process.models.get(req.params.collectionId).model.find();
+            res.set('Content-Type', 'application/json; charset=UTF-8');
+            res.send(JSON.stringify({
+                items: records
+            }));
+        } catch (error) {
+            next(new createError[400]);
+            return;
+        }
+    }
+    else if (listRule == "null") {
+        try {
+            let records = await process.models.get(req.params.collectionId).model.find();
+            res.set('Content-Type', 'application/json; charset=UTF-8');
+            res.send(JSON.stringify({
+                items: records
+            }));
+        } catch (error) {
+            next(new createError[400]);
+            return;
+        }
+    }
+    else if (listRule == "userId") {
+        if ((req.get("Authorization") === "") || (req.get("Authorization") === undefined)) {
+            next(new createError[401]);
+            return;
+        }
+
+        let verifiedJWT;
+        try {
+            verifiedJWT = jwt.verify(req.get("Authorization"), process.env.SECRET_KEY, 'HS256');
+        } catch (error) {
+            next(new createError[401]);
+            return;
+        }
+        let isadmin = true;
+        let result;
+        result = await admin.findOne({ _id: verifiedJWT.id });
+        if (result === null) {
+            isadmin = false;
+            result = await users.findOne({ _id: verifiedJWT.id });
+            if (result === null) {
+                next(new createError[401]);
+                return;
+            }
+        }
+
+        try {
+            let records;
+            if (isadmin) {
+                records = await process.models.get(req.params.collectionId).model.find();
+            }
+            else{
+                records = await process.models.get(req.params.collectionId).model.find({userId:verifiedJWT.id});
+            }
+            res.set('Content-Type', 'application/json; charset=UTF-8');
+            res.send(JSON.stringify({
+                items: records
+            }));
+        } catch (error) {
+            next(new createError[400]);
+            return;
+        }
+    }
 }
 
 async function createRecord(req, res, next) {
@@ -69,7 +152,6 @@ async function createRecord(req, res, next) {
             await process.models.get(req.params.collectionId).model.create({ userId: verifiedJWT.id, ...req.body });
             res.sendStatus(200);
         } catch (error) {
-            console.log(error.message);
             next(new createError[400]);
             return;
         }
@@ -81,10 +163,9 @@ async function createRecord(req, res, next) {
         } catch (error) { }
 
         try {
-            await process.models.get(req.params.collectionId).model.create({ userId: verifiedJWT.id ?? "unkown", ...req.body });
+            await process.models.get(req.params.collectionId).model.create({ userId: verifiedJWT?.id ?? "unkown", ...req.body });
             res.sendStatus(200);
         } catch (error) {
-            console.log(error.message);
             next(new createError[400]);
             return;
         }
@@ -115,7 +196,6 @@ async function createRecord(req, res, next) {
             await process.models.get(req.params.collectionId).model.create({ userId: verifiedJWT.id, ...req.body });
             res.sendStatus(200);
         } catch (error) {
-            console.log(error.message);
             next(new createError[400]);
             return;
         }
