@@ -31,7 +31,10 @@ async function listCollection(req, res, next) {
     if (Object.keys(req.params).length !== 0) {
         try {
             let collectiondata = await collection.findOne({ _id: req.params.collectionId });
-            console.log(collectiondata);
+            res.set('Content-Type', 'application/json; charset=UTF-8');
+            res.send(JSON.stringify({
+                items: collectiondata
+            }));
         } catch (error) {
             next(new createError[400]);
             return;
@@ -39,7 +42,10 @@ async function listCollection(req, res, next) {
     }
     else {
         let collectiondata = await collection.find();
-        console.log(collectiondata);
+        res.set('Content-Type', 'application/json; charset=UTF-8');
+        res.send(JSON.stringify({
+            items: collectiondata
+        }));
     }
 }
 
@@ -76,12 +82,11 @@ async function createCollection(req, res, next) {
     try {
         await collection.create({
             name: req.body.name,
-            schema: [{name:"userId",type:"string"},...req.body.schema, { name: "createdAt", type: "date" }, { name: "updatedAt", type: "date" }],
+            schema: [{ name: "userId", type: "string" }, ...req.body.schema, { name: "createdAt", type: "date" }, { name: "updatedAt", type: "date" }],
             rules: req.body.rules
         });
         res.sendStatus(200);
     } catch (error) {
-        console.log(error.message);
         next(new createError[400]);
         return;
     }
@@ -163,8 +168,8 @@ async function deleteCollection(req, res, next) {
     }
 
     try {
-        let result = await collection.findOneAndDelete({_id:req.params.collectionId});
-        if(result === null) throw new Error();
+        let result = await collection.findOneAndDelete({ _id: req.params.collectionId });
+        if (result === null) throw new Error();
         res.sendStatus(200);
     } catch (error) {
         next(new createError[400]);
