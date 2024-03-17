@@ -4,19 +4,6 @@ import users from "../models/user.models.js";
 import collection from "../models/collection.models.js";
 
 async function connectionDB() {
-    // await mongoose.connect(`${process.env.DB_URL}${process.env.DB_NAME}`, {
-    //     minPoolSize: 10
-    // }).then(async (mongoose) => {
-    //     console.log(`Monogobd connected:${mongoose.connection.host}`);
-    //     process.models = new Map();
-    //     let collectiondata = await collection.find();
-    //     _makeModelDynamically(collectiondata);
-    //     console.log(mongoose.connection.modelNames());
-    //     console.log(process.models.get("65f46dad578c1b6b49364ef0"));
-    // }).catch(e => {
-    //     console.log("Monogdb connection failed as:\n", e);
-    //     process.exit(1);
-    // });
     try {
         await mongoose.connect(`${process.env.DB_URL}${process.env.DB_NAME}`, { minPoolSize: 10 });
         console.log(`Monogobd connected:${mongoose.connection.host}`);
