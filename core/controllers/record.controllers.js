@@ -22,8 +22,8 @@ async function listRecord(req, res, next) {
         return;
     }
     let listRule = process.models.get(req.params.collectionId).rules.listRule;
-    
 
+    
 }
 
 async function createRecord(req, res, next) {
@@ -101,10 +101,14 @@ async function createRecord(req, res, next) {
             next(new createError[401]);
             return;
         }
-        let result = await users.findOne({ _id: verifiedJWT.id });
+        let result;
+        result = await admin.findOne({ _id: verifiedJWT.id });
         if (result === null) {
-            next(new createError[401]);
-            return;
+            result = await users.findOne({ _id: verifiedJWT.id });
+            if (result === null) {
+                next(new createError[401]);
+                return;
+            }
         }
 
         try {
