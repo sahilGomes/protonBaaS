@@ -33,13 +33,14 @@ export default function Loginpage() {
     for (const pair of data) {
       dataToSend[pair[0]] = pair[1];
     }
+    console.log(dataToSend);
     // make request and do appropriate action on response
     try {
       const res = await fetch(
-        `${location.protocol}//${location.hostname}:3000/api/admins/auth-with-password`,
+        `${location.protocol}//${location.hostname}:8080/api/admins/auth-with-password/`,
         {
           method: 'POST',
-          body: JSON.stringify(dataToSend),
+          body: JSON.stringify({email:dataToSend.identity,password:dataToSend.password}),
           headers: {
             "Content-Type": "application/json"
           }
