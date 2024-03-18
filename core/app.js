@@ -4,9 +4,12 @@ import { dirname,join } from "node:path";
 import cookieParser from "cookie-parser";
 import { fileURLToPath } from "node:url";
 import morgan from "morgan";
+import cors from "cors";
 
 // setting middlewares to be used in application
 let app = express();
+
+app.use(cors());
 
 app.use(morgan('dev')); //logging
 app.use(express.json());

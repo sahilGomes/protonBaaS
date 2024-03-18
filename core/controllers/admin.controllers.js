@@ -1,14 +1,35 @@
 import admin from "../models/admin.models.js";
 import createError from "http-errors";
 import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
 
 async function adminLogin(req, res, next) {
     /*
+    0.check if,admins collection present and go to next,if not add current admin from body and send 200
     1.check body from req if null return 404 bad request
     2.if ok,then check if email and password match if not 403 forbidden
     3.if ok,then generate jwt token from the userid and send to user to store in local storage 
      */
+    let adminsPresent = await admin.find();
+    console.log(adminsPresent);
+    if (adminsPresent.length === 0) {
+        try {
+            let result = await admin.create({
+                email: req.body.email,
+                password: req.body.password
+            });
+            let signtoken = jwt.sign(JSON.stringify({ id: result._id.toString() }), process.env.SECRET_KEY);
+            res.set('Content-Type', 'application/json; charset=UTF-8');
+            let resObj = {
+                token: signtoken
+            }
+            res.send(JSON.stringify(resObj));
+            return;
+        } catch (error) {
+            next(new createError[400]);
+            return;
+        }
+    }
+
     if (Object.keys(req.body).length === 0) {
         next(new createError[400]);
         return;
@@ -67,18 +88,18 @@ async function addAdmin(req, res, next) {
     3.if ok,and req.body is not null add the admin using provided data,if data is not validated catch it and send 400
     4.if ok,send 200
     */
-    if(await admin.find() === null){
-        try {
-            let result = await admin.create({
-                email: req.body.email,
-                password: req.body.password
-            });
-            res.sendStatus(200);
-        } catch (error) {
-            next(new createError[400]);
-            return;
-        }
-    }
+    // if (await admin.find() === null) {
+    //     try {
+    //         let result = await admin.create({
+    //             email: req.body.email,
+    //             password: req.body.password
+    //         });
+    //         res.sendStatus(200);
+    //     } catch (error) {
+    //         next(new createError[400]);
+    //         return;
+    //     }
+    // }
 
     if ((req.get("Authorization") === "") || (req.get("Authorization") === undefined)) {
         next(new createError[401]);
