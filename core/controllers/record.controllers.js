@@ -303,4 +303,107 @@ async function deleteRecord(req, res, next) {
     }
 }
 
-export { listRecord, createRecord, deleteRecord }
+async function updateRecord(req, res, next) {
+    /* 
+    1.from req.params.collectionId get updateRule from process.model.get(),if not send 400
+    2.if,updateRule == locked,i.e admins only,
+        -check if authorization header present,if not send 401
+        -if ok,verify jwt and check if admin,if error or not admin send 401
+        -if admin,findOneAndUpdate() to update,if ok send 200 else 400
+    3.if,updateRule == null,i.e anyone
+        -update the reocords,if ok send 200 else 400
+    4.if,updateRule == userId,i.e only the owner user,
+        -check if authorization header present,if not send 401
+        -if ok,verify jwt and check if user,if error or not user send 401
+        -if user,update the records of collectionId collection  and set userId to jwt.id,if ok send 200 else 400
+    */
+    if (process.models.get(req.params.collectionId) === undefined) {
+        next(new createError[400]);
+        return;
+    }
+    let updateRule = process.models.get(req.params.collectionId).rules.updateRule;
+
+    if (updateRule === "locked") {
+        if ((req.get("Authorization") === "") || (req.get("Authorization") === undefined)) {
+            next(new createError[401]);
+            return;
+        }
+
+        let verifiedJWT;
+        try {
+            verifiedJWT = jwt.verify(req.get("Authorization"), process.env.SECRET_KEY, 'HS256');
+        } catch (error) {
+            next(new createError[401]);
+            return;
+        }
+        let result = await admin.findOne({ _id: verifiedJWT.id });
+        if (result === null) {
+            next(new createError[401]);
+            return;
+        }
+
+        try {
+            await process.models.get(req.params.collectionId).model.findOneAndUpdate({ _id: req.params.recordId }, { userId: verifiedJWT?.id ?? "unkown", ...req.body });
+            res.sendStatus(200);
+        } catch (error) {
+            next(new createError[400]);
+            return;
+        }
+    }
+    else if (updateRule == "null") {
+        let verifiedJWT = undefined;
+        try {
+            verifiedJWT = jwt.verify(req.get("Authorization"), process.env.SECRET_KEY, 'HS256');
+        } catch (error) { }
+
+        try {
+            await process.models.get(req.params.collectionId).model.findOneAndUpdate({ _id: req.params.recordId }, { userId: verifiedJWT?.id ?? "unkown", ...req.body });
+            res.sendStatus(200);
+        } catch (error) {
+            next(new createError[400]);
+            return;
+        }
+    }
+    else if (updateRule == "userId") {
+        if ((req.get("Authorization") === "") || (req.get("Authorization") === undefined)) {
+            next(new createError[401]);
+            return;
+        }
+
+        let verifiedJWT;
+        try {
+            verifiedJWT = jwt.verify(req.get("Authorization"), process.env.SECRET_KEY, 'HS256');
+        } catch (error) {
+            next(new createError[401]);
+            return;
+        }
+        let isadmin = true;
+        let result;
+        result = await admin.findOne({ _id: verifiedJWT.id });
+        if (result === null) {
+            isadmin = false;
+            result = await users.findOne({ _id: verifiedJWT.id });
+            if (result === null) {
+                next(new createError[401]);
+                return;
+            }
+        }
+
+        try {
+            let result;
+            if (isadmin) {
+                result = await process.models.get(req.params.collectionId).model.findOneAndUpdate({ _id: req.params.recordId }, { userId: verifiedJWT?.id ?? "unkown", ...req.body });
+            }
+            else {
+                result = await process.models.get(req.params.collectionId).model.findOneAndUpdate({ _id: req.params.recordId, userId: verifiedJWT.id }, { userId: verifiedJWT?.id ?? "unkown", ...req.body });
+            }
+            if (result === null) throw new Error();
+            res.sendStatus(200);
+        } catch (error) {
+            next(new createError[400]);
+            return;
+        }
+    }
+}
+
+export { listRecord, createRecord, deleteRecord, updateRecord }
