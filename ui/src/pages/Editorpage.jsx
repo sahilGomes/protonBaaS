@@ -24,7 +24,7 @@ export default function Editorpage() {
                         method: 'GET',
                         headers: {
                             "Content-Type": "application/json",
-                            "Authorization":JSON.parse(localStorage.getItem("admin_auth")).token
+                            "Authorization": JSON.parse(localStorage.getItem("admin_auth")).token
                         }
                     },
                 );
@@ -32,7 +32,8 @@ export default function Editorpage() {
                 // Check if the component is still mounted before updating state
                 if (!signal.aborted) {
                     setCollectionDataArray(result["items"]);
-                    setActiveCollection(result["items"][0].name);
+                    // setActiveCollection(result["items"][0].name);
+                    result["items"].length === 0 ? setActiveCollection(undefined) : setActiveCollection(result["items"][0].name);
                     setLoading(false);
                 }
             } catch (error) {
@@ -50,7 +51,7 @@ export default function Editorpage() {
         };
     }, []);
     // 
-    if(loadingState) return <h1 className="loading-collection">Loading...</h1>
+    if (loadingState) return <h1 className="loading-collection">Loading...</h1>
     return (
         <>
             <div className="flex w-[100%]  overflow-x-auto">
@@ -58,7 +59,7 @@ export default function Editorpage() {
                     <Collection dataArray={collectionDataArray} activeCollection={activeCollection} setActiveCollection={setActiveCollection} setShowPanelData={setShowPanelData} />
                 </div>
                 <div className="document-table w-[80%] min-w-[500px] p-4 relative overflow-x-hidden">
-                    <Documentstable activeCollection={activeCollection} collectionData={collectionDataArray} setParentShowPanelData={setShowPanelData} />
+                    {activeCollection && <Documentstable activeCollection={activeCollection} collectionData={collectionDataArray} setParentShowPanelData={setShowPanelData} />}
                 </div>
             </div>
             <div className="overlayout-collection absolute right-[-1px] w-0 h-[100%] transition-all duration-100 bg-base-300 overflow-hidden bord border-l border-accent">
