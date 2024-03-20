@@ -22,7 +22,7 @@ app.use(express.static(join(dirname(fileURLToPath(import.meta.url)),'dist')));
 import adminRouter from "./routes/admin.routes.js";
 import userRouter from "./routes/user.routes.js";
 import collectionRouter from "./routes/collection.routes.js";
-import adminUiRouter from "./routes/adminUi.route.js";
+import adminUiRouter from "./routes/adminUi.routes.js";
 
 app.use("/api/admins",adminRouter);
 app.use("/api/users",userRouter);
