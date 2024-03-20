@@ -4,19 +4,54 @@ import refreshLogo from "../../assets/refreshLogo.svg";
 import { useEffect, useState } from "react";
 import TSidepanel from "./TSidepanel";
 import TableWithData from "./TableWithData";
+import { useOutletContext } from "react-router-dom";
 
 export default function Documentstable({ activeCollection, collectionData, setParentShowPanelData }) {
+  const { setPopmessage } = useOutletContext();
   const [searchvalue, setSearchvalue] = useState("");
   const [recordDataarray, setRecordDataArray] = useState([]);
   const [showPanelData, setShowPanelData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   let schema = collectionData.filter((objSchema) => {
     return activeCollection === objSchema.name
   })[0];
 
+  async function fetchData(abortController) {
+    const signal = abortController.signal;
+    setLoading(true);
+    try {
+      const response = await fetch(`${location.protocol}//${location.hostname}:8080/api/collections/${schema._id}/records`,
+        {
+          method: 'GET',
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": JSON.parse(localStorage.getItem("admin_auth")).token
+          },
+          signal: signal
+        },
+      );
+      const result = await response.json();
+      // Check if the component is still mounted before updating state
+      if (!signal.aborted) {
+        setRecordDataArray(result.items);
+        setLoading(false);
+      }
+    } catch (error) {
+      if (error.name === "AbortError") return;
+      // Handle error
+      setPopmessage(`Error fetching data at collection message:,${error.message}`)
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    // make fetch to records and update recordDataArray
-    console.log("fetch to records of: ", activeCollection)
+    const abortController = new AbortController();
+    fetchData(abortController);
+    // abort fucntion/cleanup
+    return () => {
+      abortController.abort();
+    };
   }, [activeCollection]);
 
   function handleNewDataButton(e) {
@@ -28,7 +63,7 @@ export default function Documentstable({ activeCollection, collectionData, setPa
   }
 
   function handleSettingButton(e) {
-    setParentShowPanelData({ action: "edit", singleCollectionSchema: schema ,activeCollection:activeCollection});
+    setParentShowPanelData({ action: "edit", singleCollectionSchema: schema, activeCollection: activeCollection });
     let overlayout = document.getElementsByClassName("overlayout-collection")[0];
     overlayout.classList.add("show");
   }
@@ -36,6 +71,8 @@ export default function Documentstable({ activeCollection, collectionData, setPa
   // refresh the data on refresh click
   function refreshDataHandler(e) {
     // call fetch and update recordData
+    const abortController = new AbortController();
+    fetchData(abortController);
     console.log("refresh")
   }
 
@@ -57,40 +94,7 @@ export default function Documentstable({ activeCollection, collectionData, setPa
         <div className="bg-primary p-1 rounded-lg text-primary-content cursor-pointer select-none" onClick={handleNewDataButton}>➕ New data</div>
       </div>
       <Searchbar value={searchvalue} placeholder="Search terms . . . ." changeSearchvalue={setSearchvalue} inputWidth="100%" />
-      <div className="table-container overflow-x-auto pt-1">
-        <table className="table table-lg bg-accent-neutral">
-
-          <thead>
-            <tr>
-              {tableColumnArray.map((element, index) => <th key={index}>{element}</th>)}
-            </tr>
-          </thead>
-          <tbody>
-
-            <tr className="hover">
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Quality Control Specialist</td>
-              <td>Blue</td>
-            </tr>
-
-            <tr className="hover">
-              <th>2</th>
-              <td>Hart Hagerty</td>
-              <td>Desktop Support Technician</td>
-              <td>Purple</td>
-            </tr>
-
-            <tr className="hover">
-              <th>3</th>
-              <td>Brice Swyre</td>
-              <td>Tax Accountant</td>
-              <td>Red</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      {/* <TableWithData recordDataArray={recordDataarray} schema={schema}/> */}
+      {loading ? <p>Loading...</p> : <TableWithData recordDataArray={recordDataarray} schema={schema} setShowPanelData={setShowPanelData} />}
       <div className="overlayout-table-data absolute w-0 h-[100%] top-0 left-[100%] transition-all duration-100 bg-base-300 overflow-y-auto p-2 bord border-l border-accent flex flex-col">
         {showPanelData !== null && <TSidepanel showPanelData={showPanelData} setShowPanelData={setShowPanelData} />}
       </div>
