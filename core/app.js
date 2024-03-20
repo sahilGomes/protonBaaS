@@ -15,16 +15,19 @@ app.use(morgan('dev')); //logging
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use("/pub",express.static(join(dirname(fileURLToPath(import.meta.url)),'public')));
+app.use(express.static(join(dirname(fileURLToPath(import.meta.url)),'public')));
+app.use(express.static(join(dirname(fileURLToPath(import.meta.url)),'dist')));  
 
 // routing according to path
 import adminRouter from "./routes/admin.routes.js";
 import userRouter from "./routes/user.routes.js";
 import collectionRouter from "./routes/collection.routes.js";
+import adminUiRouter from "./routes/adminUi.route.js";
 
 app.use("/api/admins",adminRouter);
 app.use("/api/users",userRouter);
 app.use("/api/collections",collectionRouter);
+app.use("/_/",adminUiRouter);
 
 // handling error
 // app.use(function(err, req, res, next) {
