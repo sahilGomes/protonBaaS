@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev":"node --watch-path=./ --env-file=./.env index.js",
-    "prod":"node --env-file=./.env index.js"
+    "dev": "node --watch-path=./ --env-file=./.env index.js",
+    "prod": "node --env-file=./.env index.js"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
