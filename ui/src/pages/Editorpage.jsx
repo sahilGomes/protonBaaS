@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext,useNavigate } from "react-router-dom";
 import useSetNav from "../customHooks/useSetNav";
 import Collection from "../component/Editorpage/Collection";
 import Documentstable from "../component/Editorpage/Documentstable";
@@ -11,9 +11,16 @@ export default function Editorpage() {
     const [collectionDataArray, setCollectionDataArray] = useState([]);  // collectiondata from fetch
     const [activeCollection, setActiveCollection] = useState(undefined); //togetActive collection
     const [showPanelData, setShowPanelData] = useState(null);  //to show overlayout for collection setting/new
+    const navigate = useNavigate();
     const [loadingState, setLoading] = useState(true);
 
+    let data_present_in_localstorage = localStorage.getItem("admin_auth") ? true : false;
+
     useEffect(() => {
+        if (!data_present_in_localstorage) {
+            navigate("/login");
+            return;
+        }
         const abortController = new AbortController();
         const fetchData = async () => {
             const signal = abortController.signal;
