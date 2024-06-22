@@ -11,9 +11,10 @@ async function connectionDB() {
         let collectiondata = await collection.find();
         _makeModelDynamically(collectiondata);  //make models from collectionschema in database
         // update models onchange in database of collection named{collections}
-        collection.watch().on('change', (change) => {
-            _handleCollectionChange(change);
-        });
+        // below commented as local run should have replication set enabled
+        // collection.watch().on('change', (change) => {
+        //     _handleCollectionChange(change);
+        // });
         console.log(mongoose.connection.modelNames());
     } catch (error) {
         console.log("Monogdb connection failed as:\n", error);
