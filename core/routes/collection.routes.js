@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.route("/").get(listCollection).post(createCollection);
 router.route("/:collectionId").get(listCollection).put(updateCollection).delete(deleteCollection);
+// for records
 router.route("/:collectionId/records/").get(listRecord).post(createRecord);
 router.route("/:collectionId/records/:recordId").put(updateRecord).delete(deleteRecord);
 
