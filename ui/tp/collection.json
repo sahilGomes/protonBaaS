@@ -1,0 +1,43 @@
+{
+    "collection": [
+        {
+            "id": "someid",
+            "type": "auth",
+            "created": "timestamp",
+            "updated": "timestamp",
+            "name": "nameofcollection(users)",
+            "schema": [
+                {
+                    "id": "55rprfla",
+                    "name": "name",
+                    "type": "text",
+                    "required": false
+                },
+                {
+                    "id": "0aozkkxk",
+                    "name": "avatar",
+                    "type": "file",
+                    "required": false,
+                    "unique": false
+                },
+                {
+                    "id": "9acb2zxa",
+                    "name": "website",
+                    "type": "url",
+                    "required": false
+                },
+                {
+                    "id": "someid",
+                    "name": "id",
+                    "type": "id",
+                    "unique": true
+                }
+            ],
+            "listRule": "id = @request.auth.id",
+            "viewRule": "id = @request.auth.id",
+            "createRule": "",
+            "updateRule": "id = @request.auth.id",
+            "deleteRule": null
+        }
+    ]
+}

@@ -1,0 +1,23 @@
++ start with editor page and navbar component
+
+
+http://127.0.0.1:8090/api/admins/auth-with-password
+post at above address
+
+
+/collections/  -> gives object of collections data such as {
+    collection id,
+    shcema,
+    api filter
+}
+
+[{"name":"role","type":"string"},{"name":"assigned","type":"string"}]
+{"listRule":"null","viewRule":"locked","createRule":"null","updateRule":"userId","deleteRule":"userId"}
+
+start on TSidepanel
+also TableWithData onclick pending
+
+so update and new pending
+
+new done
+update pending

@@ -1,0 +1,20 @@
+{
+    "name": "post",
+    "schema": [
+        {
+            "type": "string",
+            "name": "posts"
+        },
+        {
+            "type": "string",
+            "name": "que"
+        }
+    ],
+    "rule": {
+        "listrule": "",
+        "viewrule": "",
+        "updaterule": "",
+        "deleterule": "",
+        "createrule": ""
+    }
+}

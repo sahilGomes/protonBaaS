@@ -1,0 +1,369 @@
+CRUD actions
+1.List/Search records -> (GET    - /api/collections/collectionIdOrName/records)               done
+2.View one record     -> (GET    - /api/collections/collectionIdOrName/records/recordId)      done
+3.Create record       -> (POST   - /api/collections/collectionIdOrName/records)               done
+4.Update record       -> (PATCH  - /api/collections/collectionIdOrName/records/recordId)
+5.Delete record       -> (DELETE - /api/collections/collectionIdOrName/records/recordId)      done
+
+COLLECTION
+6.list collectiondata     -> (GET    - /api/collections)
+7.update collection   -> (PATCH  - /api/collections/collectionId)
+    datapayload-{"id":"XTpascjA7jyzB88","created":"2022-07-02 07:48:39.920Z","updated":"2023-03-27 19:04:44.957Z","name":"messages","type":"base","system":false,"schema":[{"system":false,"id":"bj1celjs","name":"messages","type":"text","required":true,"presentable":false,"unique":false,"options":{"min":null,"max":null,"pattern":""},"originalName":"message","toDelete":false,"nullable":false},{"system":false,"id":"ifh2x9mu","name":"author","type":"relation","required":true,"presentable":false,"unique":false,"options":{"collectionId":"POWMOh0W6IoLUAI","cascadeDelete":true,"minSelect":null,"maxSelect":1,"displayFields":["name","email"]},"originalName":"author","toDelete":false,"nullable":false}],"indexes":["CREATE INDEX `messages_created_idx` ON `messages` (`created`)"],"listRule":"@request.auth.id != null","viewRule":"@request.auth.id != null","createRule":"@request.auth.id != null","updateRule":"author = @request.auth.id","deleteRule":"author = @request.auth.id","options":{},"originalName":"messages"}
+
+8.new collection      -> (POST   - /api/collections)
+    datapayload-{"id":"","created":"","updated":"","name":"tp","type":"base","system":false,"listRule":null,"viewRule":null,"createRule":null,"updateRule":null,"deleteRule":null,"schema":[{"id":"","name":"age","type":"number","system":false,"required":false,"options":{},"onMountSelect":false,"originalName":"field","toDelete":false},{"id":"","name":"gender","type":"text","system":false,"required":false,"options":{},"onMountSelect":false,"originalName":"field","toDelete":false}],"indexes":[],"options":{},"originalName":""}
+9.delete collection   -> (DELETE - /api/collections/collectionId)
+
+fetch to /api/collections ->
+  ({
+    "page": 1,
+    "perPage": 200,
+    "totalItems": -1,
+    "totalPages": -1,
+    "items": [
+        {
+            "id": "XTpascjA7jyzB88",
+            "created": "2022-07-02 07:48:39.920Z",
+            "updated": "2023-03-27 19:04:44.957Z",
+            "name": "messages",
+            "type": "base",
+            "system": false,
+            "schema": [
+                {
+                    "system": false,
+                    "id": "bj1celjs",
+                    "name": "message",
+                    "type": "text",
+                    "required": true,
+                    "presentable": false,
+                    "unique": false,
+                    "options": {
+                        "min": null,
+                        "max": null,
+                        "pattern": ""
+                    }
+                },
+                {
+                    "system": false,
+                    "id": "ifh2x9mu",
+                    "name": "author",
+                    "type": "relation",
+                    "required": true,
+                    "presentable": false,
+                    "unique": false,
+                    "options": {
+                        "collectionId": "POWMOh0W6IoLUAI",
+                        "cascadeDelete": true,
+                        "minSelect": null,
+                        "maxSelect": 1,
+                        "displayFields": [
+                            "name",
+                            "email"
+                        ]
+                    }
+                }
+            ],
+            "indexes": [
+                "CREATE INDEX `messages_created_idx` ON `messages` (`created`)"
+            ],
+            "listRule": "@request.auth.id != null",
+            "viewRule": "@request.auth.id != null",
+            "createRule": "@request.auth.id != null",
+            "updateRule": "author = @request.auth.id",
+            "deleteRule": "author = @request.auth.id",
+            "options": {}
+        },
+        {
+            "id": "52zrtrl7k3z6sbl",
+            "created": "2023-02-25 18:33:34.253Z",
+            "updated": "2023-12-10 11:13:01.222Z",
+            "name": "messagesReport",
+            "type": "view",
+            "system": false,
+            "schema": [
+                {
+                    "system": false,
+                    "id": "jpfmrqjs",
+                    "name": "author",
+                    "type": "relation",
+                    "required": true,
+                    "presentable": false,
+                    "unique": false,
+                    "options": {
+                        "collectionId": "POWMOh0W6IoLUAI",
+                        "cascadeDelete": true,
+                        "minSelect": null,
+                        "maxSelect": 1,
+                        "displayFields": [
+                            "name",
+                            "email"
+                        ]
+                    }
+                },
+                {
+                    "system": false,
+                    "id": "byfuvx3a",
+                    "name": "total",
+                    "type": "number",
+                    "required": false,
+                    "presentable": false,
+                    "unique": false,
+                    "options": {
+                        "min": null,
+                        "max": null,
+                        "noDecimal": false
+                    }
+                }
+            ],
+            "indexes": [],
+            "listRule": "",
+            "viewRule": null,
+            "createRule": null,
+            "updateRule": null,
+            "deleteRule": null,
+            "options": {
+                "query": "SELECT\n  (ROW_NUMBER() OVER()) as id,\n  messages.author,\n  count(messages.id) as total\nFROM messages\nGROUP BY messages.author"
+            }
+        },
+        {
+            "id": "BHKW36mJl3ZPt6z",
+            "created": "2022-07-02 07:44:51.243Z",
+            "updated": "2023-03-28 06:44:33.198Z",
+            "name": "posts",
+            "type": "base",
+            "system": false,
+            "schema": [
+                {
+                    "system": false,
+                    "id": "j8rjfhnz",
+                    "name": "title",
+                    "type": "text",
+                    "required": true,
+                    "presentable": false,
+                    "unique": false,
+                    "options": {
+                        "min": null,
+                        "max": 100,
+                        "pattern": ""
+                    }
+                },
+                {
+                    "system": false,
+                    "id": "c7rgev2q",
+                    "name": "description",
+                    "type": "editor",
+                    "required": false,
+                    "presentable": false,
+                    "unique": false,
+                    "options": {
+                        "convertUrls": false
+                    }
+                },
+                {
+                    "system": false,
+                    "id": "aviu1gpy",
+                    "name": "active",
+                    "type": "bool",
+                    "required": false,
+                    "presentable": false,
+                    "unique": false,
+                    "options": {}
+                },
+                {
+                    "system": false,
+                    "id": "2vnzwepg",
+                    "name": "options",
+                    "type": "select",
+                    "required": false,
+                    "presentable": false,
+                    "unique": false,
+                    "options": {
+                        "maxSelect": 2,
+                        "values": [
+                            "optionA",
+                            "optionB",
+                            "optionC"
+                        ]
+                    }
+                },
+                {
+                    "system": false,
+                    "id": "zk7j77l9",
+                    "name": "featuredImages",
+                    "type": "file",
+                    "required": false,
+                    "presentable": false,
+                    "unique": false,
+                    "options": {
+                        "mimeTypes": [
+                            "NO_UPLOADS_ALLOWED"
+                        ],
+                        "thumbs": [
+                            "100x200"
+                        ],
+                        "maxSelect": 3,
+                        "maxSize": 5242880,
+                        "protected": false
+                    }
+                }
+            ],
+            "indexes": [
+                "CREATE INDEX `posts_created_idx` ON `posts` (`created`)"
+            ],
+            "listRule": "active = true",
+            "viewRule": "active = true",
+            "createRule": null,
+            "updateRule": null,
+            "deleteRule": null,
+            "options": {}
+        },
+        {
+            "id": "5mcrwigap5wwtju",
+            "created": "2024-03-01 09:31:10.838Z",
+            "updated": "2024-03-01 09:31:10.838Z",
+            "name": "ttt",
+            "type": "base",
+            "system": false,
+            "schema": [
+                {
+                    "system": false,
+                    "id": "2db0rhmt",
+                    "name": "qqq",
+                    "type": "text",
+                    "required": false,
+                    "presentable": false,
+                    "unique": false,
+                    "options": {
+                        "min": null,
+                        "max": null,
+                        "pattern": ""
+                    }
+                },
+                {
+                    "system": false,
+                    "id": "fhmun59r",
+                    "name": "field",
+                    "type": "relation",
+                    "required": false,
+                    "presentable": false,
+                    "unique": false,
+                    "options": {
+                        "collectionId": "POWMOh0W6IoLUAI",
+                        "cascadeDelete": false,
+                        "minSelect": null,
+                        "maxSelect": 1,
+                        "displayFields": null
+                    }
+                }
+            ],
+            "indexes": [],
+            "listRule": "",
+            "viewRule": "",
+            "createRule": null,
+            "updateRule": null,
+            "deleteRule": null,
+            "options": {}
+        },
+        {
+            "id": "POWMOh0W6IoLUAI",
+            "created": "2022-10-29 22:22:18.165Z",
+            "updated": "2023-12-10 11:13:01.224Z",
+            "name": "users",
+            "type": "auth",
+            "system": false,
+            "schema": [
+                {
+                    "system": false,
+                    "id": "55rprfla",
+                    "name": "name",
+                    "type": "text",
+                    "required": false,
+                    "presentable": true,
+                    "unique": false,
+                    "options": {
+                        "min": null,
+                        "max": null,
+                        "pattern": ""
+                    }
+                },
+                {
+                    "system": false,
+                    "id": "0aozkkxk",
+                    "name": "avatar",
+                    "type": "file",
+                    "required": false,
+                    "presentable": false,
+                    "unique": false,
+                    "options": {
+                        "mimeTypes": [
+                            "NO_UPLOADS_ALLOWED"
+                        ],
+                        "thumbs": null,
+                        "maxSelect": 1,
+                        "maxSize": 5242880,
+                        "protected": false
+                    }
+                },
+                {
+                    "system": false,
+                    "id": "9acb2zxa",
+                    "name": "website",
+                    "type": "url",
+                    "required": false,
+                    "presentable": false,
+                    "unique": false,
+                    "options": {
+                        "exceptDomains": null,
+                        "onlyDomains": null
+                    }
+                }
+            ],
+            "indexes": [
+                "CREATE INDEX `_POWMOh0W6IoLUAI_created_idx` ON `users` (`created`)"
+            ],
+            "listRule": "id = @request.auth.id",
+            "viewRule": "id = @request.auth.id",
+            "createRule": "",
+            "updateRule": "id = @request.auth.id",
+            "deleteRule": null,
+            "options": {
+                "allowEmailAuth": true,
+                "allowOAuth2Auth": true,
+                "allowUsernameAuth": false,
+                "exceptEmailDomains": null,
+                "manageRule": null,
+                "minPasswordLength": 8,
+                "onlyEmailDomains": null,
+                "onlyVerified": false,
+                "requireEmail": true
+            }
+        }
+    ]
+})
+
+9.admin auth -> (POST- api/admins/auth-with-password)  done
+
+10.admin list ->(GET - api/admins/)                    done
+10.add admin  ->(POST - api/admins/)                   done
+
+
+11.user create ->(POST - api/users/)                    done
+12.user list if admin/one for user   ->(GET  - api/users/) done
+13.user  update ->(PUT - api/users/userid)                 done
+14.user delelte ->(DELETE- api/users/userid)                
+
+admin done
+user  done
+collection  done
+record
+
+rules:-
+"locked"                                   -> admins only
+"null"                                     -> anyone
+"(non-empyt string)("userId")"             -> admin's and registerd users only
+rules-->
+@req.auth.id = "userId"
+
+
+add collections-[{"name":"name","type":"string"},{"name":"pid","type":"number"}]
+api rules-{"listRule": "locked","viewRule": "userId","createRule": "null","updateRule": "userId","deleteRule": "userId"}

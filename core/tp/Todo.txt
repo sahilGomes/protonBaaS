@@ -1,0 +1,28 @@
++ start with editor page and navbar component
+
+
+http://127.0.0.1:8090/api/admins/auth-with-password
+post at above address
+
+
+/collections/  -> gives object of collections data such as {
+    collection id,
+    shcema,
+    api filter
+}
+
+
+see mondel.watch() and according make schemas chagnes
+also look at webapi of pocketbase
+
+db.js line 27
+
+opearationType : "insert" || "update" || "delete"
+fullDocument -->data inserted
+documentKey  --> on update and delete
+
+node --watch-path=./ --env-file=./.env index.js 
+
+TO FIX:-
+1.onupdate collection name makes new collection,should make changes to current collection name.
+2.look at onupate collection as records should also be removed but logic not written.
