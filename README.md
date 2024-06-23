@@ -17,7 +17,7 @@ A extendable BaaS(Backend as a Service) based on nodejs ecosystem.
 
     - Make a .env file in the **core package** which should contain following environment variable:-
 
-        - DB_URL=your monogodb database url
+        - DB_URL=your monogodb database url.(preffer to use **mongodb atlas url** as in local u have to set mongodb database as replica as well)
         - DB_NAME=your database name
         - SECRET_KEY=hexadecimal secret key
             - To make secret key run in nodejs repl --> 
