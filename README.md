@@ -15,9 +15,9 @@ A extendable BaaS(Backend as a Service) based on nodejs ecosystem.
 
 - The **core package** contains npm script for dev and prod.As necessary run the script.
 
-    - Make a .env file in the **core package** which should contain following environment variable:-
+    - Make a **.env** file in the **core package** which should contain following environment variable:-
 
-        - DB_URL=your monogodb database url.(preffer to use **mongodb atlas url** as locally you have to set mongodb database as replica as well)
+        - DB_URL=your monogodb database url.(preffer to use **mongodb atlas url** as locally you have to set mongodb database as a replica)
         - DB_NAME=your database name.
         - PORT=port number for application to run on.
         - SECRET_KEY=hexadecimal secret key
@@ -39,4 +39,18 @@ A extendable BaaS(Backend as a Service) based on nodejs ecosystem.
     - Step 3] - The core package is ready.Now you can run it as mentioned in prod script of **core package**.
 
 - #### With Docker
-    - Support on way
+    - Download the source can and be inside the **protonBaaS directory** to follow the bellow steps.
+    - Step 1] - Install Docker locally.
+    - Step 2] - Make a **.env** file in the **core package** which should contain following environment variable:-
+
+        - DB_URL=your monogodb database url.(preffer to use **mongodb atlas url** as locally you have to set mongodb database as a replica.)
+        - DB_NAME=your database name.
+        - PORT=port number for application to run on.
+        - SECRET_KEY=hexadecimal secret key
+            - To make secret key run in nodejs repl --> 
+            ```
+            require('crypto').randomBytes(48, function(err, buffer) { var token = buffer.toString('hex'); console.log(token); });
+    - Step 2] - run->```docker build -t protonbaas .```
+    - Step 3] - run-> ```docker run -dp port:port protonbaas```
+        - eg:- docker run -dp 8080:8080 protonbaas
+    
