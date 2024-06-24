@@ -1,8 +1,9 @@
 import app from "./app.js";
 import connectionDB from "./database/db.js"
+import process from "node:process";
 
 await connectionDB().then(async()=>{
-    app.listen(8080);
-    console.log("Api--> http://127.0.0.1:8080/api/");
-    console.log("AdminUi--> http://127.0.0.1:8080/_/");
+    app.listen(process.env.PORT);
+    console.log(`Api--> http://127.0.0.1:${process.env.PORT}/api/`);
+    console.log(`AdminUi--> http://127.0.0.1:${process.env.PORT}/_/`);
 });
