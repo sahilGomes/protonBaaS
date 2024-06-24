@@ -52,6 +52,7 @@ A extendable BaaS(Backend as a Service) based on nodejs ecosystem.
             require('crypto').randomBytes(48, function(err, buffer) { var token = buffer.toString('hex'); console.log(token); });
     - Step 2] - run->```docker build -t protonbaas .```
     - Step 3] - run-> ```docker run -dp port:port protonbaas```
-        - eg:- docker run -dp 8080:8080 protonbaas
+        - eg:- docker run -dp 8080:8080 protonbaas.
+        
     Your appliction is ready to be access.Inspect the container to see access points
     
