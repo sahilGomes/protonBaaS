@@ -28,7 +28,7 @@ A extendable BaaS(Backend as a Service) based on nodejs ecosystem.
 - So to run as development:-
     - Step 1] - Run npm run dev from **core package**(Make sure your mongodb server is up and running).(This will start backend server)
     - Step 2] - Run npm run dev from **ui package**.(This will start the ui server).
-    - Step 3] - Acesss the UI.
+    - Step 3] - Now dev environment is set and hot reload is enable so you can make changes to the code as need.
 
 ---
 ### 2. As for distribution
@@ -39,7 +39,7 @@ A extendable BaaS(Backend as a Service) based on nodejs ecosystem.
     - Step 3] - The core package is ready.Now you can run it as mentioned in prod script of **core package**.
 
 - #### With Docker
-    - Download the source can and be inside the **protonBaaS directory** to follow the bellow steps.
+    - Download the source code and be inside the **protonBaaS directory** to follow the bellow steps.
     - Step 1] - Install Docker locally.
     - Step 2] - Make a **.env** file in the **core package** which should contain following environment variable:-
 
@@ -53,4 +53,5 @@ A extendable BaaS(Backend as a Service) based on nodejs ecosystem.
     - Step 2] - run->```docker build -t protonbaas .```
     - Step 3] - run-> ```docker run -dp port:port protonbaas```
         - eg:- docker run -dp 8080:8080 protonbaas
+    Your appliction is ready to be access.Inspect the container to see access points
     
