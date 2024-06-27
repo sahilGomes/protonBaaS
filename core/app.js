@@ -15,8 +15,8 @@ app.use(morgan('dev')); //logging
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(join(dirname(fileURLToPath(import.meta.url)),'public')));
-app.use(express.static(join(dirname(fileURLToPath(import.meta.url)),'dist')));  
+app.use(express.static(join(dirname(fileURLToPath(import.meta.url)),'public'),{index:false}));
+app.use(express.static(join(dirname(fileURLToPath(import.meta.url)),'dist'),{index:false}));  
 
 // routing according to path
 import adminRouter from "./routes/admin.routes.js";
