@@ -1,7 +1,7 @@
 # protonBaaS
 A extendable BaaS(Backend as a Service) based on nodejs ecosystem.
 
-### The directory contains source code structure:
+### The source code directory structure:
 ```
 /-
 └───/core(the backend logic package)
