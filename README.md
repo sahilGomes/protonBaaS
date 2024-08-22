@@ -58,4 +58,12 @@ A extendable BaaS(Backend as a Service) based on nodejs ecosystem.
 
 Any query DM:-
 https://www.linkedin.com/in/sahilgomes2003/
-    
+
+## Running priew of Admin Dashboard:-
+- ### Admin Login page -
+![Screenshot 2024-04-24 002855](https://github.com/user-attachments/assets/c5b64342-de7e-49cc-a531-90aa3e9e2580)
+
+- ### Dashboard for Setting up the schemas and to access the data -
+- ![Screenshot 2024-03-06 225210](https://github.com/user-attachments/assets/ab22e16f-928b-4023-90dc-25c1c8f4cc97)
+- ![Screenshot 2024-03-06 225151](https://github.com/user-attachments/assets/53f3d3c4-3d23-40fc-9e88-c29d7b6f6238)
+
