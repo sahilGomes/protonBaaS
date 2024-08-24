@@ -1,0 +1,363 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "api",
+    "collectionId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+    "dateExported": "2024-08-22T19:30:46.971Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "332c480d-289b-4062-bbd6-3d05034ccced",
+            "name": "admins",
+            "containerId": "",
+            "created": "2024-03-22T14:23:10.424Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "0ca729a0-dd39-4dc6-bf5a-db5118d8bd6d",
+            "name": "adminUi",
+            "containerId": "",
+            "created": "2024-03-22T14:50:44.774Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "6fac65bb-c33d-4973-9c6f-cd8211b794b7",
+            "name": "users",
+            "containerId": "",
+            "created": "2024-03-22T15:05:13.508Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "a0c0a0d8-33b4-4929-99e5-0a0b087906aa",
+            "name": "collections",
+            "containerId": "",
+            "created": "2024-03-22T17:01:33.949Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "baaeda8c-9e33-41e1-a103-4ac2e409ee86",
+            "name": "collection",
+            "containerId": "a0c0a0d8-33b4-4929-99e5-0a0b087906aa",
+            "created": "2024-03-22T17:01:56.418Z",
+            "sortNum": 50000
+        },
+        {
+            "_id": "cc71016a-eaa6-4c68-ad4c-58ab5795936d",
+            "name": "record",
+            "containerId": "a0c0a0d8-33b4-4929-99e5-0a0b087906aa",
+            "created": "2024-03-22T17:03:03.590Z",
+            "sortNum": 60000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "3aeeb166-3c29-4523-9c05-b8afa21a6b00",
+            "colId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+            "containerId": "332c480d-289b-4062-bbd6-3d05034ccced",
+            "name": "listAdmin",
+            "url": "http://127.0.0.1:8080/api/admins/",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-03-22T14:23:33.788Z",
+            "modified": "2024-03-23T04:12:20.584Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY1ZmRiZTlhMzgzNDZhMTQ2ZmM0MzFmYyJ9.iSpr5NfsipT2kklMN4G-Hz5BO0omJhpO2HQY0qp12rM"
+                }
+            ],
+            "params": [],
+            "tests": [],
+            "docs": "### GET  /api/admins/\n---\n### Header\n1. Authorization\n---\n#### Response\n| Sr.no. | Syntax | Description |\n| ------ | ----------- | -----------|\n| 1. | 400 | Bad request |\n| 2. | 200 | JSON response conatining array of admins |"
+        },
+        {
+            "_id": "8a41f3d9-c35e-400d-b5cc-a80078c0acb4",
+            "colId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+            "containerId": "332c480d-289b-4062-bbd6-3d05034ccced",
+            "name": "addAdmin",
+            "url": "http://127.0.0.1:8080/api/admins/",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-03-22T14:24:22.064Z",
+            "modified": "2024-04-23T19:08:05.748Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY1ZmFmZTEwYTg1YTQ3YzNiOTUyNGZjOSJ9.NfLVKnF1XvfAAHVLYMcAG6Ubfdqb_cvGKvJtDJhSr10"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"gg@gmail.com\",\n  \"password\":\"123\"\n}",
+                "form": []
+            },
+            "docs": "### POST  /api/admins/\n---\n### Header\n1. Authorization\n---\n#### JSON Body parameters\n1. email-string\n2. password-string\n---\n#### Response\n| Sr.no. | Syntax | Description |\n| ------ | ----------- | -----------|\n| 1. | 404 | Not Authorized|\n| 2. | 200 | Ok |"
+        },
+        {
+            "_id": "5b0a9b9c-0075-4176-bb09-f4fb1c648a90",
+            "colId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+            "containerId": "332c480d-289b-4062-bbd6-3d05034ccced",
+            "name": "authAdmin",
+            "url": "http://127.0.0.1:8080/api/admins/auth-with-password",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-03-22T14:24:42.389Z",
+            "modified": "2024-04-26T06:48:21.118Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"sg@gmail.com\",\n  \"password\":\"123123\"\n}",
+                "form": []
+            },
+            "docs": "### POST  /api/admins/auth-with-password\n---\n#### JSON Body parameters\n1. email-string\n2. password-string\n---\n#### Response\n| Sr.no. | Syntax | Description |\n| ------ | ----------- | -----------|\n| 1. | 400 | Bad request |\n| 2. | 200 | Ok |"
+        },
+        {
+            "_id": "a09dbc08-f34a-493b-84f8-536e41a0de78",
+            "colId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+            "containerId": "0ca729a0-dd39-4dc6-bf5a-db5118d8bd6d",
+            "name": "adminUI path",
+            "url": "http://127.0.0.1:8080/_/",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-03-22T14:51:06.590Z",
+            "modified": "2024-03-22T14:55:06.305Z",
+            "headers": [],
+            "params": [],
+            "tests": [],
+            "docs": "### POST  /api/_/\n---\n#### Response\n| Sr.no. | Syntax | Description |\n| ------ | ----------- | -----------|\n| 1. | 404 | Not Authorized|\n| 2. | 200 | HTML page |"
+        },
+        {
+            "_id": "3b51292b-c5e4-407f-bf8f-005029565690",
+            "colId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+            "containerId": "6fac65bb-c33d-4973-9c6f-cd8211b794b7",
+            "name": "create user",
+            "url": "http://127.0.0.1:8080/api/users",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2024-03-22T15:05:32.702Z",
+            "modified": "2024-03-22T16:53:18.900Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"g@gmail.com\",\n  \"password\":\"ok\"\n}",
+                "form": []
+            },
+            "tests": [],
+            "docs": "### POST  /api/users/\n---\n#### JSON Body parameters\n1. email-string\n2. password-string\n---\n#### Response\n| Sr.no. | Syntax | Description |\n| ------ | ----------- | -----------|\n| 1. | 400 | Bad request |\n| 2. | 200 | ok |"
+        },
+        {
+            "_id": "a6bc4673-88c4-4519-9c03-8ac4fa930d62",
+            "colId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+            "containerId": "6fac65bb-c33d-4973-9c6f-cd8211b794b7",
+            "name": "list/view users",
+            "url": "http://127.0.0.1:8080/api/users",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2024-03-22T15:05:47.573Z",
+            "modified": "2024-04-26T06:48:30.962Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MmI0YjA4NWE4YjM1NjEyMThiZGZkNyJ9.s8mV-Csq_HXvPlIhXWLx-wmXf4JcL-XuhWwngOdYHHI"
+                }
+            ],
+            "docs": "### GET  /api/users/\n---\n### Header\n1. Authorization\n---\n#### Response\n| Sr.no. | Syntax | Description |\n| ------ | ----------- | -----------|\n| 1. | 400 | Bad request |\n| 2. | 200 | JSON response |"
+        },
+        {
+            "_id": "f9de5f3c-a13c-46f7-8a03-c660dbf3075e",
+            "colId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+            "containerId": "6fac65bb-c33d-4973-9c6f-cd8211b794b7",
+            "name": "update user",
+            "url": "http://127.0.0.1:8080/api/users/65fdb792769a70337d01ecfe",
+            "method": "PUT",
+            "sortNum": 90000,
+            "created": "2024-03-22T15:05:56.569Z",
+            "modified": "2024-03-22T17:00:38.164Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY1ZmFmZTEwYTg1YTQ3YzNiOTUyNGZjOSJ9.NfLVKnF1XvfAAHVLYMcAG6Ubfdqb_cvGKvJtDJhSr10"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"g@gmail.com\",\n  \"password\":\"1213\"\n}",
+                "form": []
+            },
+            "tests": [],
+            "docs": "### PUT /api/users/:userId\n---\n### Header\n1. Authorization\n---\n#### Response\n| Sr.no. | Syntax | Description |\n| ------ | ----------- | -----------|\n| 1. | 400 | Bad request |\n| 2. | 200 | ok |"
+        },
+        {
+            "_id": "36d88883-7d26-403b-8a63-0ab1c14759f8",
+            "colId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+            "containerId": "6fac65bb-c33d-4973-9c6f-cd8211b794b7",
+            "name": "auth user",
+            "url": "http://127.0.0.1:8080/api/users/auth-with-password",
+            "method": "POST",
+            "sortNum": 100000,
+            "created": "2024-03-22T15:06:36.567Z",
+            "modified": "2024-03-22T16:57:13.186Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"g@gmail.com\",\n  \"password\":\"ok\"\n}",
+                "form": []
+            },
+            "tests": [],
+            "docs": "### GET  /api/users/auth-with-password\n---\n#### JSON Body parameters\n1. email-string\n2. password-string\n---\n#### Response\n| Sr.no. | Syntax | Description |\n| ------ | ----------- | -----------|\n| 1. | 400 | Bad request |\n| 2. | 200 | JSON response |"
+        },
+        {
+            "_id": "82bdf158-1d65-4ced-9776-f1c253d6058d",
+            "colId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+            "containerId": "baaeda8c-9e33-41e1-a103-4ac2e409ee86",
+            "name": "list/view collections",
+            "url": "http://127.0.0.1:8080/api/collections/",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2024-03-22T17:02:18.632Z",
+            "modified": "2024-03-22T17:13:07.779Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY1ZmFmZTEwYTg1YTQ3YzNiOTUyNGZjOSJ9.NfLVKnF1XvfAAHVLYMcAG6Ubfdqb_cvGKvJtDJhSr10"
+                }
+            ],
+            "params": [],
+            "tests": [],
+            "docs": "### GET  /api/collections/\n---\n### Header\n1. Authorization(admin only)\n---\n#### Response\n| Sr.no. | Syntax | Description |\n| ------ | ----------- | -----------|\n| 1. | 400 | Bad request |\n| 2. | 200 | JSON response conatining array of collections |"
+        },
+        {
+            "_id": "6f9b7b57-6523-4587-9ba5-b33c6e4b71de",
+            "colId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+            "containerId": "baaeda8c-9e33-41e1-a103-4ac2e409ee86",
+            "name": "create collection",
+            "url": "http://127.0.0.1:8080/api/collections/",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2024-03-22T17:02:28.673Z",
+            "modified": "2024-03-22T17:19:34.998Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY1ZmFmZTEwYTg1YTQ3YzNiOTUyNGZjOSJ9.NfLVKnF1XvfAAHVLYMcAG6Ubfdqb_cvGKvJtDJhSr10"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Tp\",\n  \"schema\": [\n    {\n      \"name\": \"ayo\",\n      \"type\": \"string\"\n    },\n    {\n      \"name\": \"good\",\n      \"type\": \"number\"\n    }\n  ],\n  \"rules\": {\n    \"listRule\": \"null\",\n    \"viewRule\": \"locked\",\n    \"createRule\": \"null\",\n    \"updateRule\": \"userId\",\n    \"deleteRule\": \"userId\"\n  }\n}",
+                "form": []
+            },
+            "tests": [],
+            "docs": "### POST  /api/collections/\n---\n### Header\n1. Authorization(admin only)\n---\n#### JSON Body parameters\n```\n{\n  \"name\":\"collectionName\",\n  \"schema\":[{\"name\":\"fieldName\",\"type\":\"string/number\"}],\n  \"rules\": {\n    \"listRule\": \"null/locked/userId\",\n    \"viewRule\": \"null/locked/userId\",\n    \"createRule\": \"null/locked/userId\",\n    \"updateRule\": \"null/locked/userId\",\n    \"deleteRule\": \"null/locked/userId\"\n  }\n}\n```\n---\n#### Response\n| Sr.no. | Syntax | Description |\n| ------ | ----------- | -----------|\n| 1. | 400 | Bad request |\n| 2. | 200 | JSON response conatining array of collections |"
+        },
+        {
+            "_id": "53fa35ae-e92c-430d-99a5-99707bf2ddee",
+            "colId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+            "containerId": "baaeda8c-9e33-41e1-a103-4ac2e409ee86",
+            "name": "update collection",
+            "url": "",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2024-03-22T17:02:41.981Z",
+            "modified": "2024-03-22T17:02:41.981Z",
+            "headers": []
+        },
+        {
+            "_id": "03eb973a-a931-4c10-8dc8-76ef9bdde322",
+            "colId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+            "containerId": "baaeda8c-9e33-41e1-a103-4ac2e409ee86",
+            "name": "delete collection",
+            "url": "",
+            "method": "GET",
+            "sortNum": 140000,
+            "created": "2024-03-22T17:02:50.044Z",
+            "modified": "2024-03-22T17:02:50.044Z",
+            "headers": []
+        },
+        {
+            "_id": "0bc4ae60-ad08-4d62-b1a3-4665f52b7475",
+            "colId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+            "containerId": "cc71016a-eaa6-4c68-ad4c-58ab5795936d",
+            "name": "list/view record",
+            "url": "http://127.0.0.1:8080/api/collections/662b513caa751fe4dced0156/records",
+            "method": "GET",
+            "sortNum": 150000,
+            "created": "2024-03-22T17:03:20.625Z",
+            "modified": "2024-04-26T07:28:06.214Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MmI0YjA4NWE4YjM1NjEyMThiZGZkNyJ9.s8mV-Csq_HXvPlIhXWLx-wmXf4JcL-XuhWwngOdYHHI"
+                }
+            ]
+        },
+        {
+            "_id": "16ac2de4-211c-47a8-ba67-71f06a3f070a",
+            "colId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+            "containerId": "cc71016a-eaa6-4c68-ad4c-58ab5795936d",
+            "name": "update record",
+            "url": "http://127.0.0.1:8080/api/collections/662b513caa751fe4dced0156/records/662b545faa751fe4dced0164",
+            "method": "PUT",
+            "sortNum": 160000,
+            "created": "2024-03-22T17:03:34.146Z",
+            "modified": "2024-04-26T07:17:26.035Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MmI0YjA4NWE4YjM1NjEyMThiZGZkNyJ9.s8mV-Csq_HXvPlIhXWLx-wmXf4JcL-XuhWwngOdYHHI"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\"name\":\"sahil\",\"pid\":201036}",
+                "form": []
+            }
+        },
+        {
+            "_id": "cbc208fc-ff2b-4e92-8ac6-362899ca4628",
+            "colId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+            "containerId": "cc71016a-eaa6-4c68-ad4c-58ab5795936d",
+            "name": "create record",
+            "url": "http://127.0.0.1:8080/api/collections/662b87e0595d3a89082314e5/records",
+            "method": "POST",
+            "sortNum": 170000,
+            "created": "2024-03-22T17:03:45.844Z",
+            "modified": "2024-04-26T11:01:13.991Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MmI4ODQxNTk1ZDNhODkwODIzMTRmNSJ9.LDHQ2OQ6EqphLMB0XT282RFk7Z2ysmDLoassbBWDh44",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"ssahil\",\n  \"pid\":201036\n}",
+                "form": []
+            },
+            "docs": "### POST  /api/collections/collectionId/records/\n---\n### Header\n1. Authorization\n---\n#### Response\n| Sr.no. | Syntax | Description |\n| ------ | ----------- | -----------|\n| 1. | 400 | Bad request |\n| 2. | 200 | JSON response conatining data |"
+        },
+        {
+            "_id": "eb38f5f0-ecdf-423c-b5b6-2f28c232b28c",
+            "colId": "658501f2-3514-4678-a830-d2b36aa9cdaa",
+            "containerId": "cc71016a-eaa6-4c68-ad4c-58ab5795936d",
+            "name": "delete record",
+            "url": "http://127.0.0.1:8080/api/collections/662b513caa751fe4dced0156/records/662b5214aa751fe4dced015d",
+            "method": "DELETE",
+            "sortNum": 180000,
+            "created": "2024-03-22T17:03:54.881Z",
+            "modified": "2024-04-26T07:12:54.861Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2MmI0YjA4NWE4YjM1NjEyMThiZGZkNyJ9.s8mV-Csq_HXvPlIhXWLx-wmXf4JcL-XuhWwngOdYHHI"
+                }
+            ],
+            "docs": "### DELETE  /api/collections/:collectionId/records/:recordId\n---\n### Header\n1. Authorization\n---\n#### Response\n| Sr.no. | Syntax | Description |\n| ------ | ----------- | -----------|\n| 1. | 400 | Bad request |\n| 2. | 200 | Ok |"
+        }
+    ],
+    "ref": "kyDhh3yGl02sRxNqePwcvohtSGJIeHhdE9IRvqOK5VPREvRkVJj3-uJZ35AprDNqei-x7kdWG9SBVvABQtg4-w"
+}
